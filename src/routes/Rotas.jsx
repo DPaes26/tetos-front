@@ -7,7 +7,9 @@ import PageLayout from "../layouts/PageLayout";
 import { AdminContext } from "../contexts/AdminProvider";
 import { useContext } from "react";
 import ImoveisTipo from "../pages/imoveisTipo";
-import TiposLocatario from "../pages/locatarios";
+import Locatarios from "../pages/Locatarios";
+import Usuarios from "../pages/Usuarios";
+
 
 
 
@@ -24,7 +26,8 @@ const Rotas = () => {
                             <Route index element={<Home />} />
                             <Route path="niveis" element={<Niveis />} />
                             <Route path="imoveis-tipo" element={<ImoveisTipo />} />
-                            <Route path="locatarios" element={<TiposLocatario />} />
+                            <Route path="locatarios" element={<Locatarios />} />
+                            <Route path="usuarios" element={<Usuarios />} />
                         </Route>
                     )
                 }

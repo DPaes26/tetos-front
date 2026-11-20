@@ -1,22 +1,24 @@
 import { App, Button, Drawer, Form, Input, Popconfirm, Table } from "antd";
 import { LuPencil, LuPlus, LuTrash2 } from "react-icons/lu";
-import { useBuscarImoveisTipo, useCriarImoveisTipo, useDeletarImoveisTipo, useEditarImoveisTipo } from "../hooks/locatariosHooks";
+import { useBuscarLocatarios, useCriarLocatarios, useDeletarLocatarios, useEditarLocatarios } from "../hooks/locatariosHooks";
 import { useState } from "react";
 
-const TiposLocatario = () => {
+const Locatarios = () => {
     const [mostrarCriar, setMostrarCriar] = useState(false);
     const [mostrarEditar, setMostrarEditar] = useState(false);
     const { notification } = App.useApp();
-    const { data: tipos, isLoading: loadingImoveisTipo } = useBuscarImoveisTipo();
-    const { mutate: criarImoveisTipo, isLoading: loadingCriar } = useCriarImoveisTipo();
-    const { mutate: editarImoveisTipo, isLoading: loadingEditar } = useEditarImoveisTipo();
-    const { mutate: deletarImoveisTipo } = useDeletarImoveisTipo();
+    const { data: locatarios, isLoading: loadingLocatario } = useBuscarLocatarios();
+    const { mutate: criarLocatario, isLoading: loadingCriar } = useCriarLocatarios();
+    const { mutate: editarLocatario, isLoading: loadingEditar } = useEditarLocatarios();
+    const { mutate: deletarLocatario } = useDeletarLocatarios();
     const [formEditar] = Form.useForm();
+    const [formCriar] = Form.useForm();
 
     function criar(dados) {
-        criarImoveisTipo(dados, {
+        criarLocatario(dados, {
             onSuccess: ({ type, description }) => {
                 setMostrarCriar(false);
+                formCriar.resetFields();
                 notification[type]({
                     description,
                     placement: "bottomRight"
@@ -33,7 +35,7 @@ const TiposLocatario = () => {
     function editar(dados) {
         // console.log(...dados);
 
-        editarImoveisTipo(dados, {
+        editarLocatario(dados, {
             onSuccess: ({ type, description }) => {
                 setMostrarEditar(false);
                 notification[type]({
@@ -50,7 +52,7 @@ const TiposLocatario = () => {
     }
 
     function deletar(id) {
-        deletarImoveisTipo(id, {
+        deletarLocatario(id, {
             onSuccess: ({ type, description }) => {
                 notification[type]({
                     description,
@@ -77,13 +79,21 @@ const TiposLocatario = () => {
             </div>
             <div>
                 <Table
-                    dataSource={tipos || []}
-                    loading={loadingImoveisTipo}
+                    dataSource={locatarios || []}
+                    loading={loadingLocatario}
                     rowKey={"id"}
                 >
                     <Table.Column
                         title="Nome"
                         dataIndex="nome"
+                    />
+                    <Table.Column
+                        title="Telefone"
+                        dataIndex="telefone"
+                    />
+                    <Table.Column
+                        title="CPF/CNPJ"
+                        dataIndex="cpf_cnpj"
                     />
                     <Table.Column
                         title="Ações"
@@ -132,6 +142,7 @@ const TiposLocatario = () => {
                 <Form
                     layout="vertical"
                     onFinish={criar}
+                    form={formCriar}
                 >
 
                     <Form.Item
@@ -227,4 +238,4 @@ const TiposLocatario = () => {
     );
 }
 
-export default TiposLocatario;
+export default Locatarios;

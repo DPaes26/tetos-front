@@ -3,7 +3,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { AXIOS, QUERYCLIENT } from "../services";
 
-export const useBuscarImoveisTipo = () => {
+export const useBuscarLocatarios = () => {
     return useQuery({
         queryKey: ['locatarios'],
         queryFn: async () => {
@@ -14,7 +14,7 @@ export const useBuscarImoveisTipo = () => {
 }
 
 
-export const useCriarImoveisTipo = () => {
+export const useCriarLocatarios = () => {
     return useMutation({
         queryKey: ['locatarios'],
         mutationFn: async (dados) => {
@@ -30,7 +30,7 @@ export const useCriarImoveisTipo = () => {
     });
 }
 
-export const useEditarImoveisTipo = () => {
+export const useEditarLocatarios = () => {
     return useMutation({
         queryKey: ['locatarios'],
         mutationFn: async (dados) => {
@@ -46,7 +46,7 @@ export const useEditarImoveisTipo = () => {
     });
 }
 
-export const useDeletarImoveisTipo = () => {
+export const useDeletarLocatarios = () => {
     return useMutation({
         queryKey: ['locatarios'],
         mutationFn: async (id) => {
